@@ -1,0 +1,16 @@
+# Generated file, do not edit. If you want to disable clang, just delete this file.
+build:clang --action_env='PATH=/usr/local/bin:/home/liu/.rvm/gems/ruby-2.6.0/bin:/home/liu/.rvm/gems/ruby-2.6.0@global/bin:/home/liu/.rvm/rubies/ruby-2.6.0/bin:/opt/intel/bin:/opt/intel/vtune_amplifier_xe/bin64:/opt/go/bin:/opt/llvm/tools/clang/tools/scan-build:/usr/local/cuda/bin:/opt/llvm/tools/clang/tools/scan-view:/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/liu/.fzf/bin:/usr/local/go/bin:/home/liu/.rvm/bin:/home/liu/.rvm/bin:/home/liu/.gocode/bin:/home/liu/.local/bin:/opt/swift/usr/bin'
+build:clang --action_env=CC=clang
+build:clang --action_env=CXX=clang++
+build:clang --action_env='LLVM_CONFIG=/usr/local/bin/llvm-config'
+build:clang --repo_env='LLVM_CONFIG=/usr/local/bin/llvm-config'
+build:clang --linkopt='-L/usr/local/lib'
+build:clang --linkopt='-Wl,-rpath,/usr/local/lib'
+
+build:clang-asan --action_env=ENVOY_UBSAN_VPTR=1
+build:clang-asan --copt=-fsanitize=vptr,function
+build:clang-asan --linkopt=-fsanitize=vptr,function
+build:clang-asan --linkopt='-L/usr/local/lib/clang/14.0.0/lib/linux'
+build:clang-asan --linkopt=-l:libclang_rt.ubsan_standalone-x86_64.a
+build:clang-asan --linkopt=-l:libclang_rt.ubsan_standalone_cxx-x86_64.a
+
