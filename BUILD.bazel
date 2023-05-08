@@ -1,0 +1,11 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "swift-sentencepiece",
+    srcs = ["//Sources"],
+    module_name = "SentencePiece",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//Sources:C_sentencepiece",
+    ],
+)
