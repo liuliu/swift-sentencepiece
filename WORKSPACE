@@ -36,7 +36,7 @@ new_git_repository(
     build_file = "sentencepiece.BUILD",
     commit = "3863f7648e5d8edb571ac592f3ac4f5f0695275a",
     remote = "https://github.com/google/sentencepiece.git",
-    shallow_since = "1641772872 +0100",
+    shallow_since = "1682876235 +0000",
 )
 
 # Swift formatter.
