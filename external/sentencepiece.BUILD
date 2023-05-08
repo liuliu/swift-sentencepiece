@@ -1,5 +1,17 @@
+genrule(
+    name = "config",
+    outs = ["config.h"],
+    cmd = "echo '#define VERSION \"0.1.99\"\n#define PACKAGE_STRING \"sentencepiece\"' > $(OUTS)",
+)
+
 cc_library(
     name = "absl",
+    srcs = glob(["third_party/absl/**/*.cc"]) + [
+        ":config",
+        "src/common.h",
+        "src/util.h",
+        "src/sentencepiece_processor.h",
+    ],
     hdrs = glob(["third_party/absl/**/*.h"]),
     includes = [
         "third_party/absl",
@@ -43,12 +55,6 @@ cc_library(
     deps = [],
 )
 
-genrule(
-    name = "config",
-    outs = ["src/config.h"],
-    cmd = "echo '#define VERSION \"0.1.99\"' > $(OUTS)",
-)
-
 cc_library(
     name = "sentencepiece",
     srcs = glob([
@@ -66,8 +72,6 @@ cc_library(
         "src/unigram_model.cc",
         "src/util.cc",
         "src/word_model.cc",
-    ],
-    hdrs = [
         "src/bpe_model.h",
         "src/char_model.h",
         "src/common.h",
@@ -77,16 +81,20 @@ cc_library(
         "src/model_factory.h",
         "src/model_interface.h",
         "src/normalizer.h",
-        "src/sentencepiece_processor.h",
         "src/testharness.h",
         "src/unigram_model.h",
         "src/util.h",
         "src/word_model.h",
+    ],
+    hdrs = [
+        "src/sentencepiece_processor.h",
         ":config",
     ],
-    copts = ["-fPIC"],
+    copts = [
+        "-fPIC",
+        "-Isrc",
+    ],
     includes = [
-        "src",
         "src/builtin_pb",
     ],
     linkopts = [],
@@ -140,10 +148,10 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":C_sentencepiece",
         ":absl",
         ":darts_clone",
         ":esaxx",
         ":protobuf_lite",
+        ":sentencepiece",
     ],
 )

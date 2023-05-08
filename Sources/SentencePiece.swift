@@ -10,12 +10,12 @@ class SentencePieceStorage {
   }
 }
 
-struct SentencePiece {
+public struct SentencePiece {
   private let storage: SentencePieceStorage
-  init(file: String) {
+  public init(file: String) {
     storage = SentencePieceStorage(model: file)
   }
-  func encode(_ line: String) -> [Int] {
+  public func encode(_ line: String) -> [Int] {
     var count: Int32 = 0
     guard let out = sentencepiece_encode(storage.sentencepiece, line, &count) else {
       return []

@@ -1,5 +1,5 @@
 #include "C_sentencepiece.h"
-#include "sentencepiece_processor.h"
+#include "src/sentencepiece_processor.h"
 
 void* sentencepiece_load(const char* const model)
 {
