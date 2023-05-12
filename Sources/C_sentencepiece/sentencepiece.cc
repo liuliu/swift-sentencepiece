@@ -15,10 +15,12 @@ sentence_piece_t* sentencepiece_encode(void* const sentencepiece, const char* co
 	sentencepiece::SentencePieceText spt;
 	sp->Encode(line, &spt);
 	std::vector<std::string> pieces;
+	std::vector<std::string> surfaces;
 	std::vector<int> ids;
 	for (const auto &sp : spt.pieces()) {
 		pieces.emplace_back(sp.piece());
 		ids.emplace_back(sp.id());
+		surfaces.emplace_back(sp.surface());
 	}
 	sentence_piece_t* const result = (sentence_piece_t*)malloc(sizeof(sentence_piece_t) * ids.size());
 	for (int i = 0; i < ids.size(); i++)
@@ -28,6 +30,10 @@ sentence_piece_t* sentencepiece_encode(void* const sentencepiece, const char* co
 		memcpy(piece, pieces[i].c_str(), piece_length + 1);
 		result[i].piece = piece;
 		result[i].id = ids[i];
+		const size_t surface_length = surfaces[i].length();
+		char *surface = (char *)malloc(surface_length + 1);
+		memcpy(surface, surfaces[i].c_str(), surface_length + 1);
+		result[i].surface = surface;
 	}
 	*size = ids.size();
 	return result;
