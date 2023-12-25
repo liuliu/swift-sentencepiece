@@ -29,4 +29,13 @@ public struct SentencePiece {
     out.deallocate()
     return result
   }
+  public func decode(_ ids: [Int32]) -> String {
+    guard !ids.isEmpty else { return "" }
+    return ids.withUnsafeBufferPointer {
+      guard let cString = sentencepiece_decode(storage.sentencepiece, $0.baseAddress, Int32($0.count)) else { return "" }
+      let retval = String(cString: cString)
+      cString.deallocate()
+      return retval
+    }
+  }
 }

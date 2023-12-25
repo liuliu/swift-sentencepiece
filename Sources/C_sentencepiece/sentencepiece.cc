@@ -39,6 +39,19 @@ sentence_piece_t* sentencepiece_encode(void* const sentencepiece, const char* co
 	return result;
 }
 
+const char* sentencepiece_decode(void* const sentencepiece, const int* const ids, const int size)
+{
+	sentencepiece::SentencePieceProcessor* sp = (sentencepiece::SentencePieceProcessor*)sentencepiece;
+	std::vector<int> vec;
+	std::copy(ids, ids + size, back_inserter(vec));
+	std::string text;
+	sp->Decode(vec, &text);
+	const size_t text_length = text.length();
+	char* text_cstr = (char *)malloc(text_length + 1);
+	memcpy(text_cstr, text.c_str(), text_length + 1);
+	return text_cstr;
+}
+
 void sentencepiece_free(void* sentencepiece)
 {
 	sentencepiece::SentencePieceProcessor* sp = (sentencepiece::SentencePieceProcessor*)sentencepiece;
