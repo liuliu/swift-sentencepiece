@@ -1,11 +1,19 @@
 #include "C_sentencepiece.h"
 #include "src/sentencepiece_processor.h"
 #include "src/builtin_pb/sentencepiece.pb.h"
+#include "third_party/absl/strings/string_view.h"
 
 void* sentencepiece_load(const char* const model)
 {
 	sentencepiece::SentencePieceProcessor* sp = new sentencepiece::SentencePieceProcessor();
 	sp->Load(model);
+	return (void*)sp;
+}
+
+void* sentencepiece_load_bytes(const char* const bytes, const size_t size)
+{
+	sentencepiece::SentencePieceProcessor* sp = new sentencepiece::SentencePieceProcessor();
+	sp->LoadFromSerializedProto(absl::string_view(bytes, size));
 	return (void*)sp;
 }
 

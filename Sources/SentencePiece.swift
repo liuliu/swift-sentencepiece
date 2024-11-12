@@ -1,9 +1,15 @@
 import C_sentencepiece
+import Foundation
 
 class SentencePieceStorage {
   let sentencepiece: UnsafeMutableRawPointer?
   init(model: String) {
     sentencepiece = sentencepiece_load(model)
+  }
+  init(data: Data) {
+    sentencepiece = data.withUnsafeBytes {
+      return sentencepiece_load_bytes($0.baseAddress, $0.count)
+    }
   }
   deinit {
     sentencepiece_free(sentencepiece)
@@ -14,6 +20,9 @@ public struct SentencePiece {
   private let storage: SentencePieceStorage
   public init(file: String) {
     storage = SentencePieceStorage(model: file)
+  }
+  public init(data: Data) {
+    storage = SentencePieceStorage(data: data)
   }
   public func encode(_ line: String) -> [(piece: String, id: Int32, surface: String)] {
     var count: Int32 = 0

@@ -1,7 +1,10 @@
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 void* sentencepiece_load(const char* const model);
+void* sentencepiece_load_bytes(const char* const bytes, const size_t size);
 typedef struct {
 	int id;
 	char* piece;
