@@ -1,4 +1,4 @@
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary", "swift_library")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary", "swift_library", "swift_interop_hint")
 
 cc_library(
     name = "C_sentencepiece",
@@ -10,6 +10,12 @@ cc_library(
     deps = [
         "@sentencepiece",
     ],
+    aspect_hints = [":C_sentencepiece_swift_interop"],
+)
+
+swift_interop_hint(
+    name = "C_sentencepiece_swift_interop",
+    module_name = "C_sentencepiece",
 )
 
 filegroup(
