@@ -1,13 +1,7 @@
 #include "C_sentencepiece.h"
-#ifdef SPM_BUILD
-#include "sentencepiece_processor.h"
-#include "builtin_pb/sentencepiece.pb.h"
-#include "absl/strings/string_view.h"
-#else
 #include "src/sentencepiece_processor.h"
 #include "src/builtin_pb/sentencepiece.pb.h"
 #include "third_party/absl/strings/string_view.h"
-#endif
 
 void* sentencepiece_load(const char* const model)
 {

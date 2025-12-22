@@ -10,7 +10,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/weiyanlin117/swift-package-wrapper-sentencepiece", revision: "f2953e2cf222923b6ed1907bf597318cff724b13"),
+        .package(url: "https://github.com/weiyanlin117/swift-package-wrapper-sentencepiece", revision: "1b3f57c33dac8329f7a69fdc16ec6f2bcc0b20fe"),
     ],
     targets: [
         .target(
@@ -28,10 +28,7 @@ let package = Package(
             path: "Sources/C_sentencepiece",
             publicHeadersPath: ".",
             cxxSettings: [
-                .define("SPM_BUILD"),
                 .headerSearchPath("."),
-                .headerSearchPath("../../.build/checkouts/swift-package-wrapper-sentencepiece/third_party/protobuf-lite"),
-                .headerSearchPath("../../.build/checkouts/swift-package-wrapper-sentencepiece/third_party"),
             ]
         ),
     ],
