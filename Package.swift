@@ -10,7 +10,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/weiyanlin117/swift-package-wrapper-sentencepiece", revision: "ca13a7cc8c8bf8730d122340d2218bbe8ed274dc"),
+        .package(url: "https://github.com/weiyanlin117/swift-package-support-sentencepiece", revision: "ca13a7cc8c8bf8730d122340d2218bbe8ed274dc"),
     ],
     targets: [
         .target(
