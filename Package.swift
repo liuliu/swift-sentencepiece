@@ -23,7 +23,7 @@ let package = Package(
         .target(
             name: "C_sentencepiece",
             dependencies: [
-                .product(name: "sentencepiece", package: "swift-package-wrapper-sentencepiece"),
+                .product(name: "sentencepiece", package: "swift-package-support-sentencepiece"),
             ],
             path: "Sources/C_sentencepiece",
             publicHeadersPath: ".",

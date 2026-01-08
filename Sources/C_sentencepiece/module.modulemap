@@ -1,4 +1,0 @@
-module C_sentencepiece {
-    header "C_sentencepiece.h"
-    export *
-}
