@@ -10,7 +10,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/weiyanlin117/swift-package-support-sentencepiece", revision: "ca13a7cc8c8bf8730d122340d2218bbe8ed274dc"),
+        .package(url: "https://github.com/weiyanlin117/swift-package-support-sentencepiece", revision: "a39a5be0b3e3ad9bcb19b085af7dd891c00aa3d2"),
     ],
     targets: [
         .target(
@@ -23,7 +23,7 @@ let package = Package(
         .target(
             name: "C_sentencepiece",
             dependencies: [
-                .product(name: "sentencepiece", package: "swift-package-support-sentencepiece"),
+                .product(name: "swift-package-support-sentencepiece", package: "swift-package-support-sentencepiece"),
             ],
             path: "Sources/C_sentencepiece",
             publicHeadersPath: ".",
