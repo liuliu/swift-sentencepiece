@@ -1,7 +1,7 @@
 #include "C_sentencepiece.h"
 #include "src/sentencepiece_processor.h"
 #include "src/builtin_pb/sentencepiece.pb.h"
-#include "third_party/absl/strings/string_view.h"
+#include "absl/strings/string_view.h"
 
 void* sentencepiece_load(const char* const model)
 {

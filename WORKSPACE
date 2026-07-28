@@ -20,12 +20,21 @@ swift_rules_extra_dependencies()
 
 # SentencePiece dependency.
 
+git_repository(
+    name = "com_google_absl",
+    commit = "5650e9cf76d3be4318d5fa3af38ee483ddfd5e4a",
+    remote = "https://github.com/abseil/abseil-cpp.git",
+    shallow_since = "1780339832 -0400",
+)
+
 new_git_repository(
     name = "sentencepiece",
     build_file = "sentencepiece.BUILD",
-    commit = "3863f7648e5d8edb571ac592f3ac4f5f0695275a",
+    commit = "e0cce7d37b065b5140349dbe12c6bcf6192fdd78",
+    patch_args = ["-p1"],
+    patches = ["//:external/sentencepiece-0.2.2.patch"],
     remote = "https://github.com/google/sentencepiece.git",
-    shallow_since = "1682876235 +0000",
+    shallow_since = "1782924763 +0900",
 )
 
 # Swift formatter.

@@ -1,29 +1,43 @@
+_ABSL_DEPS = [
+    "@com_google_absl//absl/base:core_headers",
+    "@com_google_absl//absl/cleanup",
+    "@com_google_absl//absl/container:btree",
+    "@com_google_absl//absl/container:fixed_array",
+    "@com_google_absl//absl/container:flat_hash_map",
+    "@com_google_absl//absl/container:flat_hash_set",
+    "@com_google_absl//absl/flags:flag",
+    "@com_google_absl//absl/flags:parse",
+    "@com_google_absl//absl/flags:usage",
+    "@com_google_absl//absl/functional:any_invocable",
+    "@com_google_absl//absl/functional:function_ref",
+    "@com_google_absl//absl/hash",
+    "@com_google_absl//absl/log:check",
+    "@com_google_absl//absl/log:globals",
+    "@com_google_absl//absl/log:initialize",
+    "@com_google_absl//absl/log:log",
+    "@com_google_absl//absl/numeric:bits",
+    "@com_google_absl//absl/random",
+    "@com_google_absl//absl/status:status",
+    "@com_google_absl//absl/status:status_builder",
+    "@com_google_absl//absl/status:status_macros",
+    "@com_google_absl//absl/strings",
+    "@com_google_absl//absl/strings:str_format",
+    "@com_google_absl//absl/synchronization",
+    "@com_google_absl//absl/time",
+    "@com_google_absl//absl/types:span",
+]
+
 genrule(
     name = "config",
     outs = ["config.h"],
-    cmd = "echo '#define VERSION \"0.1.99\"\n#define PACKAGE_STRING \"sentencepiece\"' > $(OUTS)",
-)
-
-cc_library(
-    name = "absl",
-    srcs = glob(["third_party/absl/**/*.cc"]) + [
-        ":config",
-        "src/common.h",
-        "src/util.h",
-        "src/sentencepiece_processor.h",
-    ],
-    hdrs = glob(["third_party/absl/**/*.h"]),
-    includes = [
-        "third_party/absl",
-    ],
-    linkopts = [],
-    deps = [],
+    cmd = "echo '#define VERSION \"0.2.2\"\n#define PACKAGE \"sentencepiece\"\n#define PACKAGE_STRING \"sentencepiece\"\n#define INSTALL_DATADIR \"\"' > $(OUTS)",
 )
 
 cc_library(
     name = "darts_clone",
     hdrs = glob(["third_party/darts_clone/darts.h"]),
     linkopts = [],
+    strip_include_prefix = "third_party/darts_clone",
     deps = [],
 )
 
@@ -31,6 +45,7 @@ cc_library(
     name = "esaxx",
     hdrs = glob(["third_party/esaxx/*.hxx"]),
     linkopts = [],
+    strip_include_prefix = "third_party/esaxx",
     deps = [],
 )
 
@@ -63,8 +78,8 @@ cc_library(
     ]) + [
         "src/bpe_model.cc",
         "src/char_model.cc",
-        "src/error.cc",
         "src/filesystem.cc",
+        "src/init.cc",
         "src/model_factory.cc",
         "src/model_interface.cc",
         "src/normalizer.cc",
@@ -102,8 +117,7 @@ cc_library(
         "_GNU_SOURCE",
     ],
     visibility = ["//visibility:public"],
-    deps = [
-        ":absl",
+    deps = _ABSL_DEPS + [
         ":darts_clone",
         ":protobuf_lite",
     ],
@@ -147,8 +161,7 @@ cc_library(
         "_GNU_SOURCE",
     ],
     visibility = ["//visibility:public"],
-    deps = [
-        ":absl",
+    deps = _ABSL_DEPS + [
         ":darts_clone",
         ":esaxx",
         ":protobuf_lite",
